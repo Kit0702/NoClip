@@ -1,0 +1,70 @@
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local InfoLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BackgroundTransparency = 0.350
+Main.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.469999999, 0, 0.00999999978, 0)
+Main.Size = UDim2.new(0, 150, 0, 56)
+
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = Main
+TitleLabel.BackgroundColor3 = Color3.fromRGB(122, 122, 122)
+TitleLabel.BackgroundTransparency = 0.700
+TitleLabel.Size = UDim2.new(0, 150, 0, 22)
+TitleLabel.Font = Enum.Font.SourceSans
+TitleLabel.Text = "NoClip"
+TitleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TitleLabel.TextSize = 25.000
+TitleLabel.TextWrapped = true
+
+InfoLabel.Name = "InfoLabel"
+InfoLabel.Parent = Main
+InfoLabel.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+InfoLabel.BackgroundTransparency = 0.750
+InfoLabel.Position = UDim2.new(0, 0, 0.392857134, 0)
+InfoLabel.Size = UDim2.new(0, 150, 0, 33)
+InfoLabel.Font = Enum.Font.SourceSans
+InfoLabel.Text = "false"
+InfoLabel.TextColor3 = Color3.fromRGB(76, 76, 76)
+InfoLabel.TextSize = 25.000
+InfoLabel.TextWrapped = true
+
+noclip = false
+game:GetService('RunService').Stepped:Connect(function()
+	if noclip then
+		InfoLabel.Text = "true"
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end
+end)
+
+local p = game.Players.LocalPlayer
+local mo = p:GetMouse()
+
+mo.KeyDown:Connect(function(k)
+	if k == 'x' then
+		InfoLabel.Text = "false"
+		noclip = not noclip
+		for i,v in pairs(p.Character:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end
+end)
