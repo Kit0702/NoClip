@@ -75,3 +75,100 @@
     Line.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     Line.Position = UDim2.new(0, 0, 0.431034476, 0)
     Line.Size = UDim2.new(0, 150, 0, 0)
+
+
+       --Script
+       
+       -- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local InfoLabel = Instance.new("TextLabel")
+local TittleLabel = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+main.BackgroundTransparency = 0.400
+main.Position = UDim2.new(0.5, 0, 0.0299999993, 0)
+main.Size = UDim2.new(0, 150, 0, 58)
+main.Active = true
+
+InfoLabel.Name = "InfoLabel"
+InfoLabel.Parent = main
+InfoLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+InfoLabel.BackgroundTransparency = 1.000
+InfoLabel.Position = UDim2.new(0, 0, 0.431034476, 0)
+InfoLabel.Size = UDim2.new(0, 150, 0, 32)
+InfoLabel.Font = Enum.Font.SourceSans
+InfoLabel.Text = "False"
+InfoLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+InfoLabel.TextScaled = true
+InfoLabel.TextSize = 14.000
+InfoLabel.TextWrapped = true
+
+TittleLabel.Name = "TittleLabel"
+TittleLabel.Parent = main
+TittleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TittleLabel.BackgroundTransparency = 0.700
+TittleLabel.Size = UDim2.new(0, 150, 0, 25)
+TittleLabel.Font = Enum.Font.SourceSans
+TittleLabel.Text = "NoClip"
+TittleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TittleLabel.TextScaled = true
+TittleLabel.TextSize = 14.000
+TittleLabel.TextWrapped = true
+
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = main
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BackgroundTransparency = 1.000
+CloseButton.Position = UDim2.new(0.833333373, 0, 0, 0)
+CloseButton.Size = UDim2.new(0, 25, 0, 25)
+CloseButton.Font = Enum.Font.SourceSans
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+CloseButton.TextScaled = true
+CloseButton.TextSize = 14.000
+CloseButton.TextWrapped = true
+CloseButton.MouseButton1Click:Connect(function()
+	main.Visible = false
+    InfoLabel.Visible = false
+    TittleLabel.Visisble = false
+end)
+
+
+
+--Script
+
+noclip = false
+game:GetService('RunService').Stepped:Connect(function()
+	if noclip then
+		InfoLabel.Text = "true"
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end
+end)
+
+local p = game.Players.LocalPlayer
+local mo = p:GetMouse()
+
+mo.KeyDown:Connect(function(k)
+	if k == 'x' then
+		InfoLabel.Text = "false"
+		noclip = not noclip
+		for i,v in pairs(p.Character:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	end
+end)
