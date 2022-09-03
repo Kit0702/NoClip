@@ -1,70 +1,74 @@
 -- Instances:
 
-local ScreenGui = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local TitleLabel = Instance.new("TextLabel")
-local InfoLabel = Instance.new("TextLabel")
+    local ScreenGui = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local InfoLabel = Instance.new("TextLabel")
+    local TittleLabel = Instance.new("TextLabel")
+    local CloseButton = Instance.new("TextButton")
+    local UICorner = Instance.new("UICorner")
+    local Line = Instance.new("Frame")
 
---Properties:
+    --Properties:
 
-ScreenGui.Parent = game.CoreGui
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.Parent = game.CoreGui
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Main.Name = "Main"
-Main.Parent = ScreenGui
-Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Main.BackgroundTransparency = 0.350
-Main.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.469999999, 0, 0.00999999978, 0)
-Main.Size = UDim2.new(0, 150, 0, 56)
+    Main.Name = "Main"
+    Main.Parent = ScreenGui
+    Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Main.BackgroundTransparency = 0.400
+    Main.Position = UDim2.new(0.5, 0, 0.0299999993, 0)
+    Main.Size = UDim2.new(0, 150, 0, 58)
+    Main.Active = true
 
-TitleLabel.Name = "TitleLabel"
-TitleLabel.Parent = Main
-TitleLabel.BackgroundColor3 = Color3.fromRGB(122, 122, 122)
-TitleLabel.BackgroundTransparency = 0.700
-TitleLabel.Size = UDim2.new(0, 150, 0, 22)
-TitleLabel.Font = Enum.Font.SourceSans
-TitleLabel.Text = "NoClip"
-TitleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TitleLabel.TextSize = 25.000
-TitleLabel.TextWrapped = true
+    InfoLabel.Name = "InfoLabel"
+    InfoLabel.Parent = Main
+    InfoLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    InfoLabel.BackgroundTransparency = 1.000
+    InfoLabel.Position = UDim2.new(0, 0, 0.431034476, 0)
+    InfoLabel.Size = UDim2.new(0, 150, 0, 32)
+    InfoLabel.Font = Enum.Font.SourceSans
+    InfoLabel.Text = "False"
+    InfoLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    InfoLabel.TextScaled = true
+    InfoLabel.TextSize = 14.000
+    InfoLabel.TextWrapped = true
 
-InfoLabel.Name = "InfoLabel"
-InfoLabel.Parent = Main
-InfoLabel.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-InfoLabel.BackgroundTransparency = 0.750
-InfoLabel.Position = UDim2.new(0, 0, 0.392857134, 0)
-InfoLabel.Size = UDim2.new(0, 150, 0, 33)
-InfoLabel.Font = Enum.Font.SourceSans
-InfoLabel.Text = "false"
-InfoLabel.TextColor3 = Color3.fromRGB(76, 76, 76)
-InfoLabel.TextSize = 25.000
-InfoLabel.TextWrapped = true
+    TittleLabel.Name = "TittleLabel"
+    TittleLabel.Parent = Main
+    TittleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TittleLabel.BackgroundTransparency = 1.000
+    TittleLabel.Size = UDim2.new(0, 150, 0, 25)
+    TittleLabel.Font = Enum.Font.SourceSans
+    TittleLabel.Text = "NoClip"
+    TittleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    TittleLabel.TextScaled = true
+    TittleLabel.TextSize = 14.000
+    TittleLabel.TextWrapped = true
 
-noclip = false
-game:GetService('RunService').Stepped:Connect(function()
-	if noclip then
-		InfoLabel.Text = "true"
-		for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-			if v:IsA("BasePart") then
-				v.CanCollide = false
-			end
-		end
-	end
-end)
+    CloseButton.Name = "CloseButton"
+    CloseButton.Parent = Main
+    CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CloseButton.BackgroundTransparency = 1.000
+    CloseButton.Position = UDim2.new(0.833333373, 0, 0, 0)
+    CloseButton.Size = UDim2.new(0, 25, 0, 25)
+    CloseButton.Font = Enum.Font.SourceSans
+    CloseButton.Text = "X"
+    CloseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    CloseButton.TextScaled = true
+    CloseButton.TextSize = 14.000
+    CloseButton.TextWrapped = true
+    CloseButton.MouseButton1Click:Connect(function()
+        Main.Visible = false
+        InfoLabel.Visible = false
+        TittleLabel.Visible = false
+        Line.Visible = false
+    end)
 
-local p = game.Players.LocalPlayer
-local mo = p:GetMouse()
+    UICorner.Parent = Main
 
-mo.KeyDown:Connect(function(k)
-	if k == 'x' then
-		InfoLabel.Text = "false"
-		noclip = not noclip
-		for i,v in pairs(p.Character:GetDescendants()) do
-			if v:IsA("BasePart") then
-				v.CanCollide = false
-			end
-		end
-	end
-end)
+    Line.Name = "Line"
+    Line.Parent = Main
+    Line.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Line.Position = UDim2.new(0, 0, 0.431034476, 0)
+    Line.Size = UDim2.new(0, 150, 0, 0)
